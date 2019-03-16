@@ -1,0 +1,61 @@
+﻿@model Projekt.ViewModels.MenuUserVM
+
+@{
+    ViewBag.Title = "Menu";
+    string klasa = "tabele-active";
+}
+
+<div class="jumbotron">
+
+    <div >
+        @foreach (var item in Model.dicKategoriaProdukt.Keys)
+        {
+            <a role="button" class="btn btn-primary" href="@String.Format("#{0}", item)">@Model.produktBL.NazwaKategorii(item)</a>
+        }
+    </div>
+
+    @foreach (var item in Model.dicKategoriaProdukt.Keys)
+    {
+        <div>
+            <div><h1 id="@item">@Model.produktBL.NazwaKategorii(item)</h1></div>
+            <table class="table table-hover">
+                <thead>
+                    <tr class="table-dark">
+                        <th>
+                            @Html.DisplayNameFor(model => model.dicKategoriaProdukt[item][0].Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.dicKategoriaProdukt[item][0].Description)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.dicKategoriaProdukt[item][0].basePrice)
+                        </th>
+                    </tr>
+                    @{
+                        klasa = "table-active";
+                    }
+                </thead>
+                <tbody>
+                    @foreach (var x in Model.dicKategoriaProdukt[item])
+                    {
+                        <tr class=@klasa>
+                            <td>
+                                @Html.DisplayFor(model => x.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => x.Description)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => x.basePrice) zł
+                            </td>
+                        </tr>
+
+                        if (klasa == "table-active") { klasa = "table-primary"; } else { klasa = "table-active"; }
+
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    }
+</div>

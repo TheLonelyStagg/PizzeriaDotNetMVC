@@ -1,0 +1,51 @@
+﻿@model Projekt.ViewModels.ProduktsListVM
+
+@{
+    ViewBag.Title = "Admin-Produkty";
+}
+
+<div class="jumbotron">
+    <p>
+        @Html.ActionLink("Utwórz nowy", "Create")
+    </p>
+    <table class="table">
+        <tr class="table-dark">
+            <th>
+                <span>Nazwa</span>
+            </th>
+            <th>
+                <span>Składniki</span>
+            </th>
+            <th>
+                <span>Kategoria</span>
+            </th>
+            <th>
+                <span>Cena</span>
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.produkts)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.basePrice) zł
+                </td>
+                <td>
+                    @Html.ActionLink("Edytuj", "Edit", new { id = item.ProduktId }) |
+                    @Html.ActionLink("Usuń", "Delete", new { id = item.ProduktId })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

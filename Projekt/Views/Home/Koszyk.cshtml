@@ -1,0 +1,68 @@
+﻿@model Projekt.ViewModels.KoszykListVM
+@{
+    ViewBag.Title = "Koszyk";
+    
+}
+
+<div class="jumbotron">
+    <table class="table">
+        <tr class="table-dark">
+            <th>
+                <span>Kategoria</span>
+            </th>
+            <th>
+                <span>Nazwa</span>
+            </th>
+            <th>
+                <span>Cena/szt</span>
+            </th>
+            <th>
+                <span>Ilość</span>
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.produkt_Ilosc)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(m => item.Key.Category.Split('_')[1])
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.Key.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.Key.basePrice) zł
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.Value)
+            </td>
+            <td>
+                @Html.ActionLink("+", "KoszykAdd", new { id = item.Key.ProduktId }) |
+                @Html.ActionLink("-", "KoszykRemove", new { id = item.Key.ProduktId })
+            </td>
+        </tr>
+}
+
+        <tr class="table-dark">
+            <td>
+                <span></span>
+            </td>
+            <td>
+                <span>Razem: </span>
+            </td>
+            <td>
+                <span> </span>
+            </td>
+            <td>
+                <span>@Model.kwotaRazem zł</span>
+            </td>
+            <td></td>
+        </tr>
+
+    </table>
+
+
+
+</div>
+

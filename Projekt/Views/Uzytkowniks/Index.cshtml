@@ -1,0 +1,69 @@
+﻿@model Projekt.ViewModels.UzytkowniksListVM
+@{
+    ViewBag.Title = "Admin - Uzytkownicy";
+}
+
+<div class="jumbotron">
+    <p>
+        @Html.ActionLink("Utwórz nowy", "Create")
+    </p>
+    <table class="table">
+        <tr class="table-dark">
+
+            <th>
+                <span>Nazwa użytkownika</span>
+            </th>
+            <th>
+                <span>Hasło</span>
+            </th>
+            <th>
+                <span>Adres e-mail</span>
+            </th>
+            <th>
+                <span>Imię</span>
+            </th>
+            <th>
+                <span>Nazwisko</span>
+            </th>
+            <th>
+                <span>Numer telefonu</span>
+            </th>
+            <th>
+                <span>Prawa admina</span>
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.uzytkowniks)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HashedPasswrd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @Html.CheckBoxFor(modelItem => item.IsAdmin,new { disabled = ""})
+            </td>
+            <td>
+                @Html.ActionLink("Edytuj", "Edit", new { id = item.UzytkownikId }) |
+                @Html.ActionLink("Usuń", "Delete", new { id = item.UzytkownikId })
+            </td>
+        </tr>
+        }
+
+    </table>
+</div>
